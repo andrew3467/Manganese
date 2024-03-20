@@ -18,3 +18,8 @@ add_executable(Manganese
     ${SRC}
     ${HEADERS}
 )
+
+target_link_libraries(Manganese
+        PRIVATE
+        Rhenium
+)

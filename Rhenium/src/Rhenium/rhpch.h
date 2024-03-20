@@ -2,8 +2,8 @@
 // Created by Andrew Graser on 3/18/2024.
 //
 
-#ifndef MANGANESE_MNPCH_H
-#define MANGANESE_MNPCH_H
+#ifndef MANGANESE_RHPCH_H
+#define MANGANESE_RHPCH_H
 
 
 
@@ -13,11 +13,16 @@
 #include <vector>
 #include <string>
 
+#include <cstdint>
+
 
 
 
 
 // Core
 
+// Logger
+#include "Core/Log.h"
 
-#endif //MANGANESE_MNPCH_H
+
+#endif //MANGANESE_RHPCH_H

@@ -6,19 +6,17 @@
 #include "Rhenium/Core/Application.h"
 #include "Rhenium/Core/EntryPoint.h"
 
+#include "ExampleLayer.h"
+
 
 class Sandbox : public Manganese::Application {
 public:
     Sandbox(){
-
+        PushLayer(new ExampleLayer());
     }
 
     ~Sandbox() {
 
-    }
-
-    void Run() override {
-        std::cout << "Hello, World!" << std::endl;
     }
 };
 

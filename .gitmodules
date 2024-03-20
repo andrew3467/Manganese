@@ -1,0 +1,6 @@
+[submodule "Rhenium/external/spdlog"]
+	path = Rhenium/external/spdlog
+	url = https://github.com/gabime/spdlog.git
+[submodule "Rhenium/external/glfw"]
+	path = Rhenium/external/glfw
+	url = https://github.com/glfw/glfw.git

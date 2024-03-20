@@ -5,7 +5,12 @@
 #ifndef MANGANESE_APPLICATION_H
 #define MANGANESE_APPLICATION_H
 
-#include <iostream>
+
+#include "LayerStack.h"
+#include "Window.h"
+
+#include <vector>
+#include <memory>
 
 namespace Manganese {
     class Application {
@@ -13,9 +18,18 @@ namespace Manganese {
         static Application* CreateApplication();
 
     public:
-        virtual void Run() = 0;
+        void Run();
 
 
+        void PushLayer(Layer* layer);
+
+    private:
+        bool mRunning = true;
+
+        LayerStack mLayerStack;
+
+
+        std::unique_ptr<Window> mWindow;
     };
 }
 
