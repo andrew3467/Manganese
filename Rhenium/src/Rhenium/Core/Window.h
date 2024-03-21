@@ -6,6 +6,9 @@
 #define MANGANESE_WINDOW_H
 
 
+#include "Rhenium/Events/ApplicationEvent.h"
+
+
 #include <cstdint>
 #include <string>
 
@@ -41,6 +44,8 @@ namespace Manganese {
 
     private:
         void InitGLFW();
+
+        void OnApplicationEvent(const Manganese::Event<Manganese::ApplicationEvents> &e);
 
     private:
         WindowProps mData;

@@ -19,6 +19,9 @@ set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
+# GLAD
+include_directories(external/glad/include)
+add_subdirectory(external/glad)
 
 
 
@@ -36,4 +39,5 @@ add_library(Rhenium
 target_link_libraries(Rhenium
         PUBLIC
         glfw
+        glad
 )

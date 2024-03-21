@@ -8,6 +8,10 @@
 
 #include "LayerStack.h"
 #include "Window.h"
+#include "Rhenium/Events/ApplicationEvent.h"
+
+
+
 
 #include <vector>
 #include <memory>
@@ -22,6 +26,9 @@ namespace Manganese {
 
 
         void PushLayer(Layer* layer);
+
+    private:
+        void OnApplicationEvent(const Event<ApplicationEvents>& e);
 
     private:
         bool mRunning = true;

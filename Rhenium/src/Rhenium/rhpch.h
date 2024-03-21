@@ -12,6 +12,7 @@
 #include <unordered_map>
 #include <vector>
 #include <string>
+#include <functional>
 
 #include <cstdint>
 
@@ -22,7 +23,7 @@
 // Core
 
 // Logger
-#include "Core/Log.h"
+#include "Rhenium/Core/Log/Log.h"
 
 
 #endif //MANGANESE_RHPCH_H
