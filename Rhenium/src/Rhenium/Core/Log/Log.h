@@ -5,7 +5,7 @@
 #ifndef MANGANESE_LOG_H
 #define MANGANESE_LOG_H
 
-#include "spdlog/spdlog.h"
+#include <spdlog/spdlog.h>
 
 
 

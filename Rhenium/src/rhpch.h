@@ -10,20 +10,19 @@
 // std
 #include <iostream>
 #include <unordered_map>
+#include <map>
 #include <vector>
 #include <string>
 #include <functional>
+#include <memory>
+
+#include <fstream>
+#include <sstream>
 
 #include <cstdint>
 
-
-
-
-
-// Core
-
-// Logger
-#include "Rhenium/Core/Log/Log.h"
+// glm
+#include <glm/glm.hpp>
 
 
 #endif //MANGANESE_RHPCH_H

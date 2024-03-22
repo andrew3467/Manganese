@@ -2,10 +2,10 @@
 // Created by Andrew Graser on 3/20/2024.
 //
 
-#include "Window.h"
 #include "rhpch.h"
-
+#include "Window.h"
 #include "Rhenium/Events/EventHandler.h"
+#include "Log/Log.h"
 
 
 #include <GLFW/glfw3.h>
@@ -87,5 +87,11 @@ namespace Manganese {
     void Window::OnUpdate() {
         glfwPollEvents();
         glfwSwapBuffers(mWindow);
+    }
+
+    void Window::ToggleCursor(bool enabled) {
+        mCursorEnabled = enabled;
+
+        glfwSetInputMode(mWindow, GLFW_CURSOR, enabled ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);
     }
 }

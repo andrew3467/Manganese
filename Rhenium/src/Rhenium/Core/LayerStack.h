@@ -5,7 +5,7 @@
 #ifndef MANGANESE_LAYERSTACK_H
 #define MANGANESE_LAYERSTACK_H
 
-#include <vector>
+#include "rhpch.h"
 #include "Layer.h"
 
 namespace Manganese {

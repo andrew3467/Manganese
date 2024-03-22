@@ -5,13 +5,7 @@
 #ifndef MANGANESE_EVENT_H
 #define MANGANESE_EVENT_H
 
-#include <functional>
-#include <map>
-#include <vector>
-#include <string>
-#include <memory>
-
-#include <cstdint>
+#include "rhpch.h"
 
 
 namespace Manganese {

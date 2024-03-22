@@ -5,12 +5,9 @@
 #ifndef MANGANESE_WINDOW_H
 #define MANGANESE_WINDOW_H
 
-
+#include "rhpch.h"
 #include "Rhenium/Events/ApplicationEvent.h"
 
-
-#include <cstdint>
-#include <string>
 
 class GLFWwindow;
 
@@ -40,6 +37,9 @@ namespace Manganese {
         ~Window();
 
         void OnUpdate();
+        void ToggleCursor(bool enabled);
+
+        GLFWwindow* GetNativeWindow() {return mWindow;}
 
 
     private:
@@ -49,8 +49,9 @@ namespace Manganese {
 
     private:
         WindowProps mData;
-
         GLFWwindow* mWindow;
+
+        bool mCursorEnabled = true;
     };
 }
 

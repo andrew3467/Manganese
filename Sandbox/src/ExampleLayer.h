@@ -5,7 +5,7 @@
 #ifndef MANGANESE_EXAMPLELAYER_H
 #define MANGANESE_EXAMPLELAYER_H
 
-#include <Rhenium/Rhenium.h>
+#include "Rhenium.h"
 
 
 class ExampleLayer : public Manganese::Layer {

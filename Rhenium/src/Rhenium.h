@@ -6,6 +6,6 @@
 #ifndef MANGANESE_RHENIUM_H
 #define MANGANESE_RHENIUM_H
 
-#include "Core/Layer.h"
+#include "Rhenium/Core/Layer.h"
 
 #endif //MANGANESE_RHENIUM_H

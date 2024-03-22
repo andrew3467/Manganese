@@ -10,7 +10,7 @@ ExampleLayer::ExampleLayer() {
 }
 
 void ExampleLayer::OnCreate() {
-    std::cout << "Hello!\n";
+
 }
 
 void ExampleLayer::OnDestroy() {

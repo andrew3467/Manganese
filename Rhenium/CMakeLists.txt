@@ -24,6 +24,11 @@ include_directories(external/glad/include)
 add_subdirectory(external/glad)
 
 
+# GLM
+include_directories(external/glm)
+add_subdirectory(external/glm)
+
+
 
 
 include_directories(src/Rhenium)
@@ -36,8 +41,14 @@ add_library(Rhenium
         ${HEADERS}
 )
 
+target_precompile_headers(Rhenium
+        PRIVATE
+        src/rhpch.h
+)
+
 target_link_libraries(Rhenium
         PUBLIC
         glfw
         glad
+        glm
 )
