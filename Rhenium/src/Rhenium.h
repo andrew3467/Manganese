@@ -7,5 +7,6 @@
 #define MANGANESE_RHENIUM_H
 
 #include "Rhenium/Core/Layer.h"
+#include "Rhenium/Core/Timestep.h"
 
 #endif //MANGANESE_RHENIUM_H

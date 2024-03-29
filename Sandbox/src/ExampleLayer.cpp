@@ -17,7 +17,7 @@ void ExampleLayer::OnDestroy() {
 
 }
 
-void ExampleLayer::OnUpdate() {
+void ExampleLayer::OnUpdate(Manganese::Timestep ts) {
 
 }
 

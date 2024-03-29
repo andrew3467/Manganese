@@ -6,6 +6,8 @@
 #define MANGANESE_LAYER_H
 
 
+#include "Timestep.h"
+
 namespace Manganese {
     class Layer {
     public:
@@ -15,7 +17,7 @@ namespace Manganese {
 
         virtual void OnDestroy() {};
 
-        virtual void OnUpdate() {};
+        virtual void OnUpdate(Timestep ts) {};
 
         virtual void OnImguiUpdate() {};
     };

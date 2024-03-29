@@ -7,14 +7,18 @@
 
 
 #include "Shader.h"
+#include "PerspectiveCamera.h"
 
 namespace Manganese {
     class Renderer {
     public:
         static void Init();
 
+        static void StartScene(PerspectiveCamera& camera);
+        static void EndScene();
 
-        static void DrawSquare(const std::shared_ptr<Shader>& shader, const glm::vec3& position, const glm::vec3& scale);
+        static void DrawSquare(const glm::vec3& position, const glm::vec3& scale);
+        static void DrawCube(const glm::vec3& position, const glm::vec3& scale);
     };
 }
 

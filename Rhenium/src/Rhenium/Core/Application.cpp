@@ -11,6 +11,7 @@
 
 #include "Glad/glad.h"
 #include "Renderer/Renderer.h"
+#include "Timestep.h"
 
 
 namespace Manganese {
@@ -32,22 +33,28 @@ namespace Manganese {
         Renderer::Init();
         EVENTS_ADD_APPLICATION_LISTENER(ApplicationEvents::WindowClose, Application::OnApplicationEvent, this);
 
-        std::shared_ptr<Shader> shader = std::make_shared<Shader>("../../assets/shaders/Solid_Unlit.glsl");
-        mCameraController = std::make_shared<PerspectiveCameraController>(0.5f, 2.0f);
+        mCameraController = std::make_shared<PerspectiveCameraController>(5.0f, 25.0f);
 
         while(mRunning){
+            float time = (float)glfwGetTime();     //Platform::GetTime()
+            Timestep timestep = time - mLastFrameTime;
+            mLastFrameTime = time;
+
             for(auto& layer : mLayerStack){
-                layer->OnUpdate();
+                layer->OnUpdate(timestep);
             }
 
-            mCameraController->ProcessInput(1);
+            mCameraController->ProcessInput(timestep);
 
             glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            shader->Bind();
-            shader->SetMat4("uViewProj", mCameraController->GetCamera().GetViewProjection());
-            Renderer::DrawSquare(shader, glm::vec3(0.0f), glm::vec3(1.0f));
+            Renderer::StartScene(mCameraController->GetCamera());
+
+            Renderer::DrawSquare(glm::vec3(0.0f), glm::vec3(1.0f));
+
+            Renderer::EndScene();
+
 
             mWindow->OnUpdate();
         }

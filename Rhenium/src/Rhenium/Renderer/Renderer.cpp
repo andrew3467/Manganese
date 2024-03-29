@@ -5,59 +5,118 @@
 #include "Renderer.h"
 #include "rhpch.h"
 #include "glm/ext/matrix_transform.hpp"
+#include "VertexArray.h"
 
 
 #include <Glad/glad.h>
 
 
-struct RendererData {
-    uint32_t SquareVA;
-};
-
-
-RendererData* sData = nullptr;
 
 namespace Manganese {
+    struct RendererData {
+        std::shared_ptr<VertexArray> SquareVA;
+        std::shared_ptr<VertexArray> CubeVA;
+
+        std::shared_ptr<Shader> Shader;
+    };
+
+    RendererData* sData = nullptr;
+
+
+
     void Renderer::Init() {
         sData = new RendererData;
 
-        float vertices[4 * 5] = {
-                -0.5f, -0.5f, 0.0f,         0.0f, 0.0f,
-                0.5f, -0.5f, 0.0f,          1.0f, 0.0f,
-                0.5f, 0.5f, 0.0f,        1.0f, 1.0f,
-                -0.5f, 0.5f, 0.0f,       0.0f, 1.0f,
-        };
+        {
+            float vertices[4 * 5] = {
+                    -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+                    0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+                    0.5f, 0.5f, 0.0f, 1.0f, 1.0f,
+                    -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
+            };
 
-        uint32_t indices[2 * 3] {
-                0, 1, 2,
-                2, 3, 0
-        };
+            uint32_t indices[2 * 3]{
+                    0, 1, 2,
+                    2, 3, 0
+            };
 
-        glGenVertexArrays(1, &sData->SquareVA);
-        glBindVertexArray(sData->SquareVA);
+            sData->SquareVA = std::make_shared<VertexArray>();
 
-        uint32_t vb, ib;
+            std::shared_ptr<VertexBuffer> vb = std::make_shared<VertexBuffer>(vertices, sizeof(vertices));
 
-        glGenBuffers(1, &vb);
-        glBindBuffer(GL_ARRAY_BUFFER, vb);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+            vb->SetLayout({
+                                  {3, GL_FLOAT, 0, false},
+                                  {2, GL_FLOAT, 3, false},
+                          });
 
-        glGenBuffers(1, &ib);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ib);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+            sData->SquareVA->SetVertexBuffer(vb);
 
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, false, sizeof(float) * 5, (void*)0);
+            std::shared_ptr<IndexBuffer> ib = std::make_shared<IndexBuffer>(indices,
+                                                                            sizeof(indices) / sizeof(uint32_t));
+            sData->SquareVA->SetIndexBuffer(ib);
+        }
+
+        {
+            float vertices[4 * 5] = {
+                    -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+                    0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+                    0.5f, 0.5f, 0.0f, 1.0f, 1.0f,
+                    -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
+            };
+
+            uint32_t indices[2 * 3]{
+                    0, 1, 2,
+                    2, 3, 0
+            };
+
+            sData->CubeVA = std::make_shared<VertexArray>();
+
+            std::shared_ptr<VertexBuffer> vb = std::make_shared<VertexBuffer>(vertices, sizeof(vertices));
+
+            vb->SetLayout({
+                                  {3, GL_FLOAT, 0, false},
+                                  {2, GL_FLOAT, 3, false},
+                          });
+
+            sData->CubeVA->SetVertexBuffer(vb);
+
+            std::shared_ptr<IndexBuffer> ib = std::make_shared<IndexBuffer>(indices,
+                                                                            sizeof(indices) / sizeof(uint32_t));
+            sData->CubeVA->SetIndexBuffer(ib);
+        }
+
+
+        sData->Shader = std::make_shared<Shader>("../../assets/shaders/Solid_Unlit.glsl");
     }
 
-    void Renderer::DrawSquare(const std::shared_ptr<Shader>& shader, const glm::vec3& position, const glm::vec3& scale) {
+    void Renderer::DrawSquare(const glm::vec3& position, const glm::vec3& scale) {
         auto transform = glm::translate(glm::scale(glm::mat4(1.0f), scale), position);
 
-        shader->Bind();
+        sData->Shader->Bind();
 
-        shader->SetMat4("uTransform", transform);
+        sData->Shader->SetMat4("uTransform", transform);
 
-        glBindVertexArray(sData->SquareVA);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        sData->SquareVA->Bind();
+        glDrawElements(GL_TRIANGLES, sData->SquareVA->GetIndexBuffer().GetCount(), GL_UNSIGNED_INT, 0);
+    }
+
+    void Renderer::DrawCube(const glm::vec3 &position, const glm::vec3 &scale) {
+        auto transform = glm::translate(glm::scale(glm::mat4(1.0f), scale), position);
+
+        sData->Shader->Bind();
+
+        sData->Shader->SetMat4("uTransform", transform);
+
+        sData->CubeVA->Bind();
+        glDrawElements(GL_TRIANGLES, sData->CubeVA->GetIndexBuffer().GetCount(), GL_UNSIGNED_INT, 0);
+    }
+
+    void Renderer::StartScene(PerspectiveCamera &camera) {
+        sData->Shader->Bind();
+        sData->Shader->SetMat4("uViewProj", camera.GetViewProjection());
+    }
+
+    void Renderer::EndScene() {
+
     }
 }

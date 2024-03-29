@@ -33,8 +33,9 @@ namespace Manganese {
 
         bool mRunning = true;
 
-        LayerStack mLayerStack;
+        float mLastFrameTime;
 
+        LayerStack mLayerStack;
 
         std::unique_ptr<Window> mWindow;
         std::shared_ptr<PerspectiveCameraController> mCameraController;

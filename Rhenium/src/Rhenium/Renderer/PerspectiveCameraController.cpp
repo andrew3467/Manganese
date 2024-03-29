@@ -20,12 +20,12 @@ namespace Manganese {
 
     }
 
-    void PerspectiveCameraController::ProcessInput(float ts) {
+    void PerspectiveCameraController::ProcessInput(Timestep ts) {
         KeyboardInput(ts);
         MouseInput(ts);
     }
 
-    void PerspectiveCameraController::KeyboardInput(float ts) {
+    void PerspectiveCameraController::KeyboardInput(Timestep ts) {
 
         if (Input::IsKeyPressed(GLFW_KEY_W)) {
             mCamera->ProcessKeyboard(FORWARD, ts, mMoveSpeed);
@@ -41,7 +41,7 @@ namespace Manganese {
         }
     }
 
-    void PerspectiveCameraController::MouseInput(float ts) {
+    void PerspectiveCameraController::MouseInput(Timestep ts) {
 
         if (Input::IsMouseButtonPressed(GLFW_MOUSE_BUTTON_MIDDLE)) {
             Application::GetInstance().GetWindow().ToggleCursor(false);

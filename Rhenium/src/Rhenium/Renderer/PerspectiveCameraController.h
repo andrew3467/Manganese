@@ -8,6 +8,7 @@
 
 #include <memory>
 #include "PerspectiveCamera.h"
+#include "Rhenium/Core/Timestep.h"
 
 #include <GLFW/glfw3.h>
 
@@ -21,12 +22,12 @@ namespace Manganese {
 
         inline PerspectiveCamera &GetCamera() const { return *mCamera; }
 
-        void ProcessInput(float ts);
+        void ProcessInput(Timestep ts);
 
     private:
-        void KeyboardInput(float ts);
+        void KeyboardInput(Timestep ts);
 
-        void MouseInput(float ts);
+        void MouseInput(Timestep ts);
 
     private:
         std::shared_ptr<PerspectiveCamera> mCamera;

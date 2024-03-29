@@ -16,7 +16,7 @@ public:
     virtual void OnCreate() override;
     virtual void OnDestroy() override;
 
-    virtual void OnUpdate() override;
+    virtual void OnUpdate(Manganese::Timestep ts) override;
     virtual void OnImguiUpdate() override;
 };
 
